@@ -12,29 +12,28 @@ from typing import List, Dict, Tuple, Optional
 # ==============================
 # ⚙️ PAGE CONFIG & STYLES
 # ==============================
-st.set_page_config(page_title="🎯 Playoff Paths — CFB Dashboard", layout="wide")
+st.set_page_config(page_title="Playoff Paths", layout="wide")
 
+# --- Top banner ---
 st.markdown(
     """
     <style>
-        .block-container { padding-top: 2.2rem; }
-        .statcard { background:#f7f9fc; border:1px solid #e6e9ef; border-radius:10px; padding:10px 14px; }
-        .statnum { font-size:1.4rem; font-weight:700; }
-        .statlbl { color:#5b677a; font-size:0.9rem; }
-        .muted   { color:#6b7280; }
+        .block-container {
+            padding-top: 3rem;
+        }
     </style>
     """,
-    unsafe_allow_html=True,
+    unsafe_allow_html=True
 )
-
 st.markdown(
     """
     <div style="background-color:#002D62; padding:4px 10px; border-radius:10px; margin-bottom:10px;">
-        <h1 style="color:white; text-align:center;">🎯 Path to the Playoffs</h1>
+        <h1 style="color:white; text-align:center;">🏈 BG.Analytics CFB Dashboard</h1>
     </div>
     """,
-    unsafe_allow_html=True,
+    unsafe_allow_html=True
 )
+st.markdown("The Playoff Paths Beta is very experimental at this stage. Much of the code takes over 10 minutes to run and is not perfectly accurate.")
 
 # ------------------------------
 # 🔁 Controls — Rerun & Cache

@@ -11,7 +11,26 @@ import pandas as pd
 import numpy as np
 
 st.set_page_config(page_title="Full Season Simulation", layout="wide")
-st.title("🧮 Full Season Simulation")
+# --- Top banner ---
+st.markdown(
+    """
+    <style>
+        .block-container {
+            padding-top: 3rem;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+st.markdown(
+    """
+    <div style="background-color:#002D62; padding:4px 10px; border-radius:10px; margin-bottom:10px;">
+        <h1 style="color:white; text-align:center;">🏈 BG.Analytics CFB Dashboard</h1>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+st.markdown("Season Simulation Beta takes a while to run. Allow for around 5 minutes to load.")
 
 # 🔁 Re-run control (clear caches, then rerun)
 if st.button("🔁 Re-run simulation", help="Run the Monte Carlo again with fresh randomness"):

@@ -12,15 +12,28 @@ import plotly.graph_objects as go
 # =========================
 # 🔧 PAGE CONFIGURATION
 # =========================
-st.set_page_config(page_title="College Football Playoff Dashboard", layout="wide")
+st.set_page_config(page_title="Single Team Analysis", layout="wide")
 
-st.markdown("""
-<style>
-    .block-container {
-        padding-top: 3rem;
-    }
-</style>
-""", unsafe_allow_html=True)
+# --- Top banner ---
+st.markdown(
+    """
+    <style>
+        .block-container {
+            padding-top: 3rem;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+st.markdown(
+    """
+    <div style="background-color:#002D62; padding:4px 10px; border-radius:10px; margin-bottom:10px;">
+        <h1 style="color:white; text-align:center;">🏈 BG.Analytics CFB Dashboard</h1>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+st.markdown("Allow for 1 minute of loading the first time you run. All subsequent runs are immediate.")
 
 # =========================
 # 🌟 DONUT CHART FUNCTIONS
@@ -72,11 +85,6 @@ current.loc[current['startTimeTBD'].astype(bool), 'startTime'] = "TBD"
 # =========================
 teams = sorted(current["team"].unique())
 selected_team = "-- Select a team --"
-st.markdown("""
-    <div style="background-color:#002D62; padding:4px 10px; border-radius:10px; margin-bottom:10px;">
-        <h1 style="color:white; text-align:center;">🏈 College Football Playoff Dashboard</h1>
-    </div>
-    """, unsafe_allow_html=True)
 
 col_left, col_mid, col_right = st.columns([1, 2, 1])
 
