@@ -79,16 +79,15 @@ def load_team_logos():
 def load_team_ranks():
     df = current.copy()
     if "teamRank" in df.columns:
-        df = (
-            df.dropna(subset=["teamRank"])
-              .sort_values("startDate", ascending=False)
+        # Get the MOST RECENT row per team (rank may be NaN if currently unranked)
+        latest = (
+            df.sort_values("startDate", ascending=False)
               .drop_duplicates(subset=["team"])
+              .copy()
         )
-        try:
-            df["teamRank"] = df["teamRank"].astype(int)
-        except Exception:
-            pass
-        return dict(zip(df["team"], df["teamRank"]))
+        # Coerce to numeric; keep NaN for unranked
+        latest["teamRank"] = pd.to_numeric(latest["teamRank"], errors="coerce")
+        return dict(zip(latest["team"], latest["teamRank"]))
     return {}
 
 @st.cache_data
@@ -286,7 +285,15 @@ if mode == "Hypothetical":
         game_type = st.selectbox("Game Type", ["Home/Away", "Neutral Site"], index=0)
     with col3:
         home_team = st.selectbox("Select Home Team", team_list, index=0, placeholder="Select home team")
-    game_date = st.date_input("Game Date", value=pd.Timestamp.today().date())
+    # Date & Time selectors side-by-side
+    date_col, time_col = st.columns(2)
+    with date_col:
+        game_date = st.date_input("Game Date", value=pd.Timestamp.today().date())
+    with time_col:
+        time_options = [
+            "12:00 PM", "3:30 PM", "7:00 PM", "8:00 PM", "10:30 PM",
+        ]
+        game_time = st.selectbox("Game Time (ET)", options=time_options, index=1)
     location = "Neutral" if game_type == "Neutral Site" else "Away"
     away_display = fmt_team_with_rank(away_team)
     home_display = fmt_team_with_rank(home_team)
